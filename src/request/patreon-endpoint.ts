@@ -77,7 +77,7 @@ export class PatreonRequest extends BasicAuthenticatedPatreonRequest {
 
   public getStream(
     options?: IStreamRequestOptions
-  ): requestPromise.RequestPromise<TypedResponse<TStreamResponse>> {
+  ): RequestPromise<TypedResponse<TStreamResponse>> {
     return this.getRequest("api/stream", options)
   }
 

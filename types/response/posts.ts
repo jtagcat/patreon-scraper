@@ -1,17 +1,17 @@
-import { IPost } from "../patreon-data-types/post"
+import { PatreonPost } from "../patreon-data-types/post"
 import { GenericResponse } from "../response"
 
-export type TPostsResponse = GenericResponse<IPost[], IPostsResponseMeta>
+export type TPostsResponse = GenericResponse<PatreonPost[], PostsResponseMeta>
 
-interface IPostsResponseMeta {
-  pagination: IPaginationInfo
+interface PostsResponseMeta {
+  pagination: PaginationInfo
 }
 
-interface IPaginationInfo {
-  cursors: ICursorsInfo
+interface PaginationInfo {
+  cursors: CursorsInfo
   total: number
 }
 
-interface ICursorsInfo {
+interface CursorsInfo {
   next: string
 }

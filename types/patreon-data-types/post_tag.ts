@@ -4,12 +4,12 @@ import {
   CommonDataProperties
 } from "../response"
 
-export interface IPostTag extends CommonDataProperties {
-  attributes: IPostTagAttributes
+export interface PatreonPostTag extends CommonDataProperties {
+  attributes: PostTagAttributes
   type: DataTypeKey.PostTag
 }
 
-interface IPostTagAttributes extends CommonAttributes {
+interface PostTagAttributes extends CommonAttributes {
   background_image_url: string | null
   cardinality: number
   is_featured: boolean

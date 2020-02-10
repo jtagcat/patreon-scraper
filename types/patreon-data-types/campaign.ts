@@ -5,13 +5,13 @@ import {
   CommonRelationships
 } from "../response"
 
-export interface ICampaign extends CommonDataProperties {
-  attributes: ICampaignAttributes
-  relationships: ICampaignRelationships
+export interface PatreonCampaign extends CommonDataProperties {
+  attributes: CampaignAttributes
+  relationships: CampaignRelationships
   type: DataTypeKey.Campaign
 }
 
-interface ICampaignAttributes extends CommonAttributes {
+interface CampaignAttributes extends CommonAttributes {
   avatar_photo_url?: string
   created_at: Date
   creation_count: number
@@ -45,7 +45,7 @@ interface ICampaignAttributes extends CommonAttributes {
   url: string
 }
 
-interface ICampaignRelationships extends CommonRelationships {
+interface CampaignRelationships extends CommonRelationships {
   creator?: any
   goals?: any
   pledges?: any

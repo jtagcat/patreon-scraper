@@ -6,13 +6,13 @@ import {
   GenericRelationshipAttributes
 } from "../response"
 
-export interface IAccessRule extends CommonDataProperties {
-  attributes: IAccessRuleAttributes
-  relationships: IAccessRuleRelationships
+export interface PatreonAccessRule extends CommonDataProperties {
+  attributes: AccessRuleAttributes
+  relationships: AccessRuleRelationships
   type: DataTypeKey.AccessRule
 }
 
-interface IAccessRuleAttributes extends CommonAttributes {
+interface AccessRuleAttributes extends CommonAttributes {
   access_rule_type: AccessRuleTypeKey
   amount_cents: number | null
   post_count: number
@@ -22,6 +22,6 @@ enum AccessRuleTypeKey {
   Patrons = "patrons"
 }
 
-interface IAccessRuleRelationships extends CommonRelationships {
+interface AccessRuleRelationships extends CommonRelationships {
   tier?: GenericRelationshipAttributes<any | null, void>
 }

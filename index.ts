@@ -25,9 +25,10 @@ function printHelp(): void {
   console.log(
     "patreon-scraper 0.0.1\n\n" +
       "Usage:\n" +
-      "\tpatreon-scraper [-s <sessionId>] [-o <outputDir>]\n\n" +
+      "\tpatreon-scraper [-s <sessionId>] [-o <outputDir>] [<creator name>]\n\n" +
       "-s --sessionId\t\tSupply Patreon session ID cookie\n" +
-      "-o --outputDir\t\tChoose download directory location\n"
+      "-o --outputDir\t\tChoose download directory location\n" +
+      "<creator name>\t\tOnly download filed from supplied creator\n"
   )
 }
 

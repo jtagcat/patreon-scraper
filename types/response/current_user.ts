@@ -1,4 +1,4 @@
-import { IUser } from "../patreon-data-types/user"
+import { PatreonUser } from "../patreon-data-types/user"
 import { GenericResponse } from "../response"
 
-export type TCurrentUserResponse = GenericResponse<IUser, void>
+export type TCurrentUserResponse = GenericResponse<PatreonUser, void>

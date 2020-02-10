@@ -1,3 +1,8 @@
+export interface MediaIdentifier {
+  name: string
+  url: string
+}
+
 export interface AttachmentIdentifier extends FileUrlQS {
   name: string
 }

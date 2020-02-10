@@ -1,10 +1,15 @@
 import * as moment from "moment"
 import * as qs from "qs"
-import { AttachmentIdentifier, FileUrlQS, Maybe } from "../types/common"
-import { IAttachment } from "../types/patreon-data-types/attachment"
+import {
+  AttachmentIdentifier,
+  FileUrlQS,
+  Maybe,
+  MediaIdentifier
+} from "../types/common"
+import { PatreonAttachment } from "../types/patreon-data-types/attachment"
 import {
   ApiPostTypeKey,
-  IFileAttributes
+  FileAttributes
 } from "../types/patreon-data-types/post"
 import { TStreamResponse } from "../types/response/stream"
 import { IStreamRequestOptions } from "../types/request"
@@ -23,32 +28,46 @@ export class AttachmentScraper {
   }
 
   public getCurrAttachments(): AttachmentIdentifier[] {
-    if (this.currPage?.included) {
+    if (this.currPage?.included && this.currPage.included.length > 0) {
       const attachments = this.currPage.included.filter(
         obj => obj.type === DataTypeKey.Attachment
-      ) as IAttachment[]
+      ) as PatreonAttachment[]
       return this.dataToAttachment(attachments)
     } else {
       return []
     }
   }
 
-  public getCurrPostFiles(): IFileAttributes[] {
-    if (this.currPage?.data) {
-      const validImagePosts = this.currPage.data.filter(
-        post =>
-          post?.attributes?.post_type === ApiPostTypeKey.ImageFile &&
-          post?.attributes?.post_file
-      )
-
-      const postsWithoutAttachment = validImagePosts.filter(
-        post => !((post?.relationships?.attachments?.length ?? -1) > 0)
-      )
-      return postsWithoutAttachment.map(post => post.attributes.post_file)
+  public getCurrPostsMedia(): MediaIdentifier[] {
+    if (this.currPage?.data && this.currPage.data.length > 0) {
+      return this.currPage.data
+        .filter(
+          obj =>
+            obj?.type === DataTypeKey.Post &&
+            obj?.attributes?.post_file !== null
+        )
+        .map(post => post.attributes.post_file) as MediaIdentifier[]
     } else {
       return []
     }
   }
+
+  // public getCurrPostFiles(): FileAttributes[] {
+  //   if (this.currPage?.data) {
+  //     const validImagePosts = this.currPage.data.filter(
+  //       post =>
+  //         post?.attributes?.post_type === ApiPostTypeKey.ImageFile &&
+  //         post?.attributes?.post_file
+  //     )
+
+  //     const postsWithoutAttachment = validImagePosts.filter(
+  //       post => !((post?.relationships?.attachments?.length ?? -1) > 0)
+  //     )
+  //     return postsWithoutAttachment.map(post => post.attributes.post_file)
+  //   } else {
+  //     return []
+  //   }
+  // }
 
   public isLastPage(): boolean {
     const postCount = this.getPostsCount()
@@ -85,7 +104,7 @@ export class AttachmentScraper {
     this.nextCursor = null
   }
 
-  private dataToAttachment(data: IAttachment[]): AttachmentIdentifier[] {
+  private dataToAttachment(data: PatreonAttachment[]): AttachmentIdentifier[] {
     const sparseArray = data.map(val => {
       const urlSplit = val.attributes.url.split("?")
       if (urlSplit.length > 1) {

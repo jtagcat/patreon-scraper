@@ -6,13 +6,13 @@ import {
   CommonRelationships
 } from "../response"
 
-export interface IUser extends CommonDataProperties {
-  attributes: IUserAttributes
-  relationships: IUserRelationships
+export interface PatreonUser extends CommonDataProperties {
+  attributes: UserAttributes
+  relationships: UserRelationships
   type: DataTypeKey.User
 }
 
-interface IUserAttributes extends CommonAttributes {
+interface UserAttributes extends CommonAttributes {
   about: string | null
   can_see_nsfw: boolean | null
   comment_count?: number
@@ -34,7 +34,7 @@ interface IUserAttributes extends CommonAttributes {
   is_suspended: boolean
   last_name: string | null
   like_count?: number
-  social_connections: ISocialConnections
+  social_connections: SocialConnections
   thumb_url: string
   twitch: string | null
   twitter: string | null
@@ -44,12 +44,12 @@ interface IUserAttributes extends CommonAttributes {
   youtube?: string | null
 }
 
-interface IUserRelationships extends CommonRelationships {
+interface UserRelationships extends CommonRelationships {
   campaign?: ICommonRelationshipAttributes
   memberships?: ICommonRelationshipAttributes[]
 }
 
-interface ISocialConnections {
+interface SocialConnections {
   deviantart: string | null
   discord: string | null
   facebook: string | null

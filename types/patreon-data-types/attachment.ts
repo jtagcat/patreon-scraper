@@ -4,12 +4,12 @@ import {
   CommonDataProperties
 } from "../response"
 
-export interface IAttachment extends CommonDataProperties {
-  attributes: IAttachmentAttributes
+export interface PatreonAttachment extends CommonDataProperties {
+  attributes: AttachmentAttributes
   type: DataTypeKey.Attachment
 }
 
-interface IAttachmentAttributes extends CommonAttributes {
+interface AttachmentAttributes extends CommonAttributes {
   name: string
   url: string
 }

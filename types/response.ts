@@ -1,12 +1,13 @@
 import { Response } from "cloudscraper"
-import { IAccessRule } from "./patreon-data-types/access_rule"
-import { IAttachment } from "./patreon-data-types/attachment"
-import { ICampaign } from "./patreon-data-types/campaign"
+import { PatreonAccessRule } from "./patreon-data-types/access_rule"
+import { PatreonAttachment } from "./patreon-data-types/attachment"
+import { PatreonCampaign } from "./patreon-data-types/campaign"
 import { Poll } from "./patreon-data-types/poll"
-import { IPollChoice } from "./patreon-data-types/poll_choice"
-import { IPost } from "./patreon-data-types/post"
-import { IPostTag } from "./patreon-data-types/post_tag"
-import { IUser } from "./patreon-data-types/user"
+import { PatreonPollChoice } from "./patreon-data-types/poll_choice"
+import { PatreonPost } from "./patreon-data-types/post"
+import { PatreonPostTag } from "./patreon-data-types/post_tag"
+import { PatreonUser } from "./patreon-data-types/user"
+import { PatreonMedia } from "./patreon-data-types/media"
 
 export interface TypedResponse<T> extends Response {
   body: T
@@ -24,14 +25,15 @@ export interface CommonDataProperties {
 }
 
 export type TDataObject =
-  | IUser
-  | IPost
-  | IPollChoice
-  | IPostTag
-  | IAccessRule
-  | IAttachment
-  | ICampaign
+  | PatreonUser
+  | PatreonPost
+  | PatreonPollChoice
+  | PatreonPostTag
+  | PatreonAccessRule
+  | PatreonAttachment
+  | PatreonCampaign
   | Poll
+  | PatreonMedia
 
 export interface CommonAttributes {}
 
@@ -73,5 +75,6 @@ export enum DataTypeKey {
   User = "user",
   Poll = "poll",
   PollChoice = "poll_choice",
-  Pledge = "pledge"
+  Pledge = "pledge",
+  Media = "media"
 }

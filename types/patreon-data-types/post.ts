@@ -6,14 +6,15 @@ import {
   CommonRelationships,
   GenericRelationshipAttributes
 } from "../response"
+import { Maybe } from "../common"
 
-export interface IPost extends CommonDataProperties {
-  attributes: IPostAttributes
-  relationships: IPostRelationships
+export interface PatreonPost extends CommonDataProperties {
+  attributes: PostAttributes
+  relationships: PostRelationships
   type: DataTypeKey.Post
 }
 
-interface IPostAttributes extends CommonAttributes {
+interface PostAttributes extends CommonAttributes {
   change_visibility_at: Date | null
   comment_count: number
   content: string
@@ -25,28 +26,30 @@ interface IPostAttributes extends CommonAttributes {
   edit_url?: string
   edited_at?: Date | null
   // TODO: embed type
-  embed: any | null
-  image: IImageAttributes
+  embed: Maybe<any>
+  image: Maybe<ImageAttributes>
   is_automated_monthly_charge?: boolean
   is_paid: boolean
   like_count: number
-  min_cents_pledged_to_view: number | null
+  min_cents_pledged_to_view: Maybe<number>
   patreon_url: string
   patron_count: number
   pledge_url: string
-  post_file: IFileAttributes
+  post_file: Maybe<FileAttributes>
+  // TODO: metadata type
+  post_metadata: Maybe<unknown>
   post_type: ApiPostTypeKey
   published_at: Date
   scheduled_for?: Date | null
-  teaser_text: string | null
-  thumbnail?: IThumbnailData
+  teaser_text: Maybe<string>
+  thumbnail?: ThumbnailData
   title: string
   upgrade_url?: string
   url: string
   was_posted_by_campaign_owner: boolean
 }
 
-interface IPostRelationships extends CommonRelationships {
+interface PostRelationships extends CommonRelationships {
   access_rules?: ICommonRelationshipAttributes[]
   attachments?: ICommonRelationshipAttributes[]
   campaign?: ICommonRelationshipAttributes
@@ -55,12 +58,12 @@ interface IPostRelationships extends CommonRelationships {
   user_defined_tags?: ICommonRelationshipAttributes[]
 }
 
-export interface IFileAttributes extends CommonAttributes {
+export interface FileAttributes extends CommonAttributes {
   name: string
   url: string
 }
 
-interface IImageAttributes extends CommonAttributes {
+interface ImageAttributes extends CommonAttributes {
   height: number
   large_url: string
   thumb_url: string
@@ -84,7 +87,7 @@ export enum ApiPostTypeKey {
   Deleted = "deleted"
 }
 
-interface IThumbnailData {
+interface ThumbnailData {
   huge: string
   large: string
   large_2: string
